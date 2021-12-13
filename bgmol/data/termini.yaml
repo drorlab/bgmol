@@ -26,7 +26,38 @@ HSE:
 # - ["O", "C", "CA", "N"]
 # - ["HA", "CA", "N", "C"]
 
-HSP:
+HSE:
   - ["HN", "N", "CA", "C"]
   - ["O", "C", "CA", "N"]
   - ["HA", "CA", "N", "C"]
+  - ["CB", "CA", "N", "C"] #Jasper started adding here
+  - ["CG", "CB", "CA", "N"]
+  - ["CD2", "CG", "CB", "CA"]
+  - ["ND1", "CG", "CB", "CD2"]
+  - ["NE2", "CD2", "CG", "CB"]
+  - ["CE1", "ND1", "NE2", "CG"]
+  - ["HB1", "CB", "CA", "CG"]
+  - ["HB2", "CB", "CA", "CG"]
+  - ["HE2", "NE2", "CD2", "CG"]
+  - ["HD2", "CD2", "CG", "NE2"]
+  - ["HE1", "CE1", "ND1", "NE2"]
+
+
+HSP:
+  - ["H", "N", "CA", "C"]
+  - ["O", "C", "CA", "N"]
+  - ["HA", "CA", "N", "C"]
+  - ["CB", "CA", "N", "C"] #Jasper started adding here
+  - ["CG", "CB", "CA", "N"]
+  - ["CD2", "CG", "CB", "CA"]
+  - ["ND1", "CG", "CB", "CD2"]
+  - ["NE2", "CD2", "CG", "CB"]
+  - ["CE1", "ND1", "NE2", "CG"]
+  - ["HB2", "CB", "CA", "CG"]
+  - ["HB3", "CB", "CA", "CG"]
+  - ["HD1", "ND1", "CG", "CE1"]
+  - ["HD2", "CD2", "CG", "NE2"]
+  - ["HE1", "CE1", "ND1", "NE2"]
+  - ["HE2", "NE2", "CD2", "CG"]
+
+

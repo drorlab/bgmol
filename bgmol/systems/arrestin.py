@@ -16,16 +16,18 @@ class ArrestinActive(OpenMMSystem):
     """
     def __init__(self,  root=tempfile.gettempdir(), download=True):
         super(ArrestinActive, self).__init__()
+        
+        inputdir = "/oak/stanford/groups/rondror/projects/ensemble-generators/arrestin/openmm-arrestin/"
+        pdbname = inputdir+"arr2-active_start_centered.pdb"
+        picklename = inputdir+'arr2-active_system.pkl'
 
-        filename = "openmm-arrestin/arr2-active_start.pdb"
-
-        pdb = app.PDBFile(filename)
-        ff = app.ForceField("amber99sbildn.xml", "amber96_obc.xml")
-
-        name = 'openmm-arrestin/arr2-active_system'
-        with open(name + '.pkl', 'rb') as f:
+        with open(picklename, 'rb') as f:
             system = pickle.load(f)
             self._system = system
+
+        ff = app.ForceField("amber99sbildn.xml", "amber96_obc.xml")
+
+        pdb = app.PDBFile(pdbname)
 
         self._positions = pdb.getPositions(asNumpy=True)
         self._topology = pdb.getTopology()
@@ -39,17 +41,18 @@ class ArrestinInactive(OpenMMSystem):
     def __init__(self,  root=tempfile.gettempdir(), download=True):
         super(ArrestinInactive, self).__init__()
 
-        filename = "openmm-arrestin/arr2-inactive_system"
-        full_filename = os.path.join(root, filename)
+        inputdir = "/oak/stanford/groups/rondror/projects/ensemble-generators/arrestin/openmm-arrestin/"
+        pdbname = inputdir+"arr2-inactive_start_centered.pdb"
+        picklename = inputdir+'arr2-inactive_system.pkl'
 
-        pdb = app.PDBFile(filename)
-        ff = app.ForceField("amber99sbildn.xml", "amber96_obc.xml")
-
-        name = 'arrestin_system_inactive'#file doesn't exist yet
-        with open(name + '.pkl', 'rb') as f:
+        with open(picklename, 'rb') as f:
             system = pickle.load(f)
             self._system = system
-        
+
+        ff = app.ForceField("amber99sbildn.xml", "amber96_obc.xml")
+
+        pdb = app.PDBFile(pdbname)
+
         self._positions = pdb.getPositions(asNumpy=True)
         self._topology = pdb.getTopology()
         self.z_matrix = None

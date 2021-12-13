@@ -4,6 +4,7 @@ from bgmol.datasets.base import DataSet
 from bgmol.api import system_by_name
 from bgmol.tpl.hdf5 import HDF5TrajectoryFile, load_hdf5
 import pickle
+import mdtraj
 
 __all__ = ["ArrestinActive", "ArrestinInactive"]
 
@@ -21,23 +22,20 @@ class ArrestinActive(DataSet):
     openmm_version = "7.4.1"
     date = "2021/8/15"
 
+    loc = '/oak/stanford/groups/rondror/projects/ensemble-generators/arrestin/openmm-arrestin/'
+    top = loc+'arr2-active_start_centered.pdb'
+    trj = loc+'arr2-active_output_aligned_final.xtc'
+    log = loc+'arr2-active_log.txt'
+
     def __init__(self, root=os.getcwd()):
         super(ArrestinActive, self).__init__(root=root)
         self._system = system_by_name("ArrestinActive")
         self._temperature = 310
-        name = 'arr2-active_coordinates'
-        with open(name + '.pkl', 'rb') as f:
-            coords = pickle.load(f)
-            self._xyz = coords
+        self._xyz = mdtraj.load_xtc(self.trj, self.top).xyz
 
     def read(self):
-#        self.trajectory = load_dcd(self.trajectory_file)
-        energy_logfile = 'arr2-active_log.txt'
-        self._energies = np.loadtxt(energy_logfile, delimiter=',')[:,1]
-#        self._forces = np.loadtxt(force_logfile, delimiter=',')[:,1]
+        self._energies = np.loadtxt(self.log, delimiter=',')[:,1]
        
-
-
 
 class ArrestinInactive(DataSet):
     """ArrestinInactive at 310 K.
@@ -52,18 +50,18 @@ class ArrestinInactive(DataSet):
     openmm_version = "7.4.1"
     date = "2021/08/15"
 
-    def __init__(self, root=os.getcwd(), download: bool = False, read: bool = False):
-        super(ArrestinInactive, self).__init__(root=root, download=download, read=read)
+    loc = '/oak/stanford/groups/rondror/projects/ensemble-generators/arrestin/openmm-arrestin/'
+    top = loc+'arr2-inactive_start_centered.pdb'
+    trj = loc+'arr2-inactive_output_aligned_final.xtc'
+    log = loc+'arr2-inactive_log.txt'
+
+    def __init__(self, root=os.getcwd()):
+        super(ArrestinInactive, self).__init__(root=root)
         self._system = system_by_name("ArrestinInactive")
         self._temperature = 310
-        name = 'arr2-inactive_coordinates'
-        with open(name + '.pkl', 'rb') as f:
-            coords = pickle.load(f)
-            self._xyz = coords
+        self._xyz = mdtraj.load_xtc(self.trj, self.top).xyz
 
     def read(self):
-#        self.trajectory = load_dcd(self.trajectory_file)
-        energy_logfile = 'arr2-inactive_log.txt'
-        self._energies = np.loadtxt(energy_logfile, delimiter=',')[:,1]
-#        self._forces = np.loadtxt(force_logfile, delimiter=',')[:,1]
-        
+        self._energies = np.loadtxt(self.log, delimiter=',')[:,1]
+
+

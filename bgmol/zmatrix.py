@@ -182,9 +182,7 @@ class ZMatrixFactory:
 
             resatoms = {a.name: a.index for a in residue.atoms}
             resname = residue.name
-            print('resname', resname)
             for entry in templates[resname]:  # template entry:
-                print('entry', entry)
                 if not self._is_placed(resatoms[entry[0]]):  # not in not_ic:
                     self._z.append([resatoms[_e] for _e in entry])
 
